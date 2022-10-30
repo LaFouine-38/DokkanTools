@@ -71,7 +71,12 @@
             updateSizes(window.innerHeight, window.innerWidth)
 
         })
-
+        const blocked = [".", ",", "e", "E"]
+        document.addEventListener("keydown", (e) => {
+            if (blocked.includes(e.key)) {
+                event.preventDefault();
+            }   
+        });
     </script>
 </body>
 
