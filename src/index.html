@@ -13,27 +13,27 @@
     <div id="main">
         <ol>
             <li>
-                <img src="assets/diamond.png">
+                <img src="../assets/diamond.png">
                 <input data-value="5000000" class="amount" type="number" id="diamond">
             </li>
             <li>
-                <img src="assets/platinum.png">
+                <img src="../assets/platinum.png">
                 <input data-value="1500000" class="amount" type="number" id="platinum">
             </li>
             <li>
-                <img src="assets/gold.png">
+                <img src="../assets/gold.png">
                 <input data-value="1000000" class="amount" type="number" id="gold">
             </li>
             <li>
-                <img src="assets/silver.png">
+                <img src="../assets/silver.png">
                 <input data-value="500000" class="amount" type="number" id="silver">
             </li>
             <li>
-                <img src="assets/bronze.png">
+                <img src="../assets/bronze.png">
                 <input data-value="250000" class="amount" type="number" id="bronze">
             </li>
             <li style="margin-top: 15px;">
-                <img src="assets/zeni.png" id="zenipng">
+                <img src="../assets/zeni.png" id="zenipng">
                 <input type="text" disabled id="zenis">
             </li>
         </ol>
@@ -58,17 +58,16 @@
 
     </script>
     <style id="stylesheet">
-
     </style>
     <script>
         const stylesheet = document.styleSheets[1]
         //chercher pr changer cssText ou le selector est bon
         function updateSizes(height, width){
-            console.log(document.styleSheets)
-            document.querySelectorAll('li img').forEach((e)=>{e.style.width = `${width/15.4875}px` })
+            console.log(styleSheets)
+            /*document.querySelectorAll('li img').forEach((e)=>{e.style.width = `${width/15.4875}px` })
             document.querySelectorAll('.amount').forEach((e)=>{
                 e.style.height = `${width/15.4875/1.4285714285714285714285714285714}px`
-            })
+            })*/
         }
         window.onload = updateSizes(window.innerHeight, window.innerWidth)
         window.addEventListener("resize", (e)=>{
