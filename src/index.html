@@ -11,7 +11,7 @@
 
 <body>
     <div id="main">
-        <ol>
+        <ol id="container">
             <li>
                 <img src="../assets/diamond.png">
                 <input data-value="5000000" class="amount" type="number" id="diamond">
@@ -59,23 +59,34 @@
     <script>
         let root = document.documentElement;
         function updateSizes(height, width) {
-            root.style.setProperty('--image-width', `${width / 15.4875}px`);
-            root.style.setProperty('--input-height', `${width/ 15.4875/1.4285714285714285714285714285714}px`);
-            root.style.setProperty('--input-width', `${width/4.13}px`)
-            root.style.setProperty('--input-font', `${width/4.13/4.285714285714}px`)
-            root.style.setProperty('--zenis-font', `${width/4.13/7.5}px`)
-            
+            root.style.setProperty('--input-height', `${height / 10.33928571428}px`);
+            root.style.setProperty('--input-width', `${width / 4.13}px`)
+            root.style.setProperty('--input-font', `${width / 4.13 / 4.285714285714}px`)
+            root.style.setProperty('--zenis-font', `${width / 4.13 / 7.5}px`)
+            if (document.querySelector('.amount').offsetHeight > (width / 15.4875 / 1.143478260869)) {
+                root.style.setProperty('--image-width', `${height / 8.275923913040 * 1.143478260869}px`)
+                root.style.setProperty('--image-height', `${height / 8.275923913040}px`)
+
+            } else {
+                root.style.setProperty('--image-width', `${width / 15.4875}px`);
+                root.style.setProperty('--image-height', `${width / 15.4875 / 1.143478260869}px`)
+
+            }
         }
+        //        window.onload = updateSizes(window.innerHeight, window.innerWidth)
         window.onload = updateSizes(window.innerHeight, window.innerWidth)
+
         window.addEventListener("resize", (e) => {
+            //if (window.innerHeight <= document.querySelector('#container').offsetHeight){
             updateSizes(window.innerHeight, window.innerWidth)
+            //}
 
         })
         const blocked = [".", ",", "e", "E"]
         document.addEventListener("keydown", (e) => {
             if (blocked.includes(e.key)) {
                 event.preventDefault();
-            }   
+            }
         });
     </script>
 </body>

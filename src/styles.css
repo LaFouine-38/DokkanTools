@@ -4,12 +4,14 @@
     --input-width: 300px;
     --zenis-font: 40px;
     --input-font: 70px;
+    --image-height: 69.96197718634px;
 }
 
 body {
-    height: 100%;
-    width: 100%;
+    min-height: var(--min-height);
+    min-width: 100vh;
     margin: 0;
+    overflow: hidden;
 }
 
 div#main {
@@ -27,6 +29,7 @@ ol {
     padding: 10px;
     background-color: whitesmoke;
     z-index: 0;
+
 }
 
 
@@ -45,12 +48,9 @@ li img {
     z-index: 2;
     width: var(--image-width);
 }
-
-/* img#zenipng{
-    position: relative;
-    z-index: 2;
-    width: 80px;
-} */
+li img:not(#zenipng){
+    height: var(--image-height);
+}
 
 li input {
     position: relative;
@@ -58,7 +58,6 @@ li input {
     /*height: img width / 1,4285714285714285714285714285714*/
     height: var(--input-height);
     width: var(--input-width);
-    /* bottom: 2.5px; */
     border-radius: 20px;
     border-style: black;
     font-size: var(--input-font);
