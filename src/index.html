@@ -47,7 +47,6 @@
             if (e.target.classList.contains('amount')) {
                 let zenis = 0
                 fields.forEach((field) => {
-                    console.dir(field.value)
                     if (field.value) {
                         zenis += parseInt(field.getAttribute('data-value')) * field.value
                     }
@@ -57,23 +56,22 @@
         })
 
     </script>
-    <style id="stylesheet">
-    </style>
     <script>
-        const stylesheet = document.styleSheets[1]
-        //chercher pr changer cssText ou le selector est bon
-        function updateSizes(height, width){
-            console.log(styleSheets)
-            /*document.querySelectorAll('li img').forEach((e)=>{e.style.width = `${width/15.4875}px` })
-            document.querySelectorAll('.amount').forEach((e)=>{
-                e.style.height = `${width/15.4875/1.4285714285714285714285714285714}px`
-            })*/
+        let root = document.documentElement;
+        function updateSizes(height, width) {
+            root.style.setProperty('--image-width', `${width / 15.4875}px`);
+            root.style.setProperty('--input-height', `${width/ 15.4875/1.4285714285714285714285714285714}px`);
+            root.style.setProperty('--input-width', `${width/4.13}px`)
+            root.style.setProperty('--input-font', `${width/4.13/4.285714285714}px`)
+            root.style.setProperty('--zenis-font', `${width/4.13/7.5}px`)
+            
         }
         window.onload = updateSizes(window.innerHeight, window.innerWidth)
-        window.addEventListener("resize", (e)=>{
-            updateSizes(window.innerHeight, window.innerWidth)           
+        window.addEventListener("resize", (e) => {
+            updateSizes(window.innerHeight, window.innerWidth)
 
         })
+
     </script>
 </body>
 
