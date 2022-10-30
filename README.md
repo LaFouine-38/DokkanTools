@@ -2,6 +2,10 @@
 
 - Calculateur de la valeur des statues de satan
 
+## Petite précision.
+
+Sur mobile il peut y avoir quelques problemes d'affichage.
+
 
 ## Comment l'utiliser ?
 
