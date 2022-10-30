@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Calculateur de statues</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' href='./styles.css'>
+</head>
+
+<body>
+    <div id="main">
+        <ol>
+            <li>
+                <img src="assets/diamond.png">
+                <input data-value="5000000" class="amount" type="number" id="diamond">
+            </li>
+            <li>
+                <img src="assets/platinum.png">
+                <input data-value="1500000" class="amount" type="number" id="platinum">
+            </li>
+            <li>
+                <img src="assets/gold.png">
+                <input data-value="1000000" class="amount" type="number" id="gold">
+            </li>
+            <li>
+                <img src="assets/silver.png">
+                <input data-value="500000" class="amount" type="number" id="silver">
+            </li>
+            <li>
+                <img src="assets/bronze.png">
+                <input data-value="250000" class="amount" type="number" id="bronze">
+            </li>
+            <li style="margin-top: 15px;">
+                <img src="assets/zeni.png" id="zenipng">
+                <input type="text" disabled id="zenis">
+            </li>
+        </ol>
+    </div>
+    <script>
+        function separatedNumber(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        }
+        const fields = document.querySelectorAll('.amount')
+        document.addEventListener('input', (e) => {
+            if (e.target.classList.contains('amount')) {
+                let zenis = 0
+                fields.forEach((field) => {
+                    console.dir(field.value)
+                    if (field.value) {
+                        zenis += parseInt(field.getAttribute('data-value')) * field.value
+                    }
+                })
+                document.querySelector('#zenis').value = separatedNumber(zenis)
+            }
+        })
+
+    </script>
+    <style id="stylesheet">
+
+    </style>
+    <script>
+        const stylesheet = document.styleSheets[1]
+        //chercher pr changer cssText ou le selector est bon
+        function updateSizes(height, width){
+            console.log(document.styleSheets)
+            document.querySelectorAll('li img').forEach((e)=>{e.style.width = `${width/15.4875}px` })
+            document.querySelectorAll('.amount').forEach((e)=>{
+                e.style.height = `${width/15.4875/1.4285714285714285714285714285714}px`
+            })
+        }
+        window.onload = updateSizes(window.innerHeight, window.innerWidth)
+        window.addEventListener("resize", (e)=>{
+            updateSizes(window.innerHeight, window.innerWidth)           
+
+        })
+    </script>
+</body>
+
+</html>
