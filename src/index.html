@@ -11,53 +11,70 @@
 
 <body>
     <div id="main">
-        <ol id="container">
-            <li>
-                <img src="../assets/diamond.png">
-                <input data-value="5000000" class="amount" type="number" id="diamond">
-            </li>
-            <li>
-                <img src="../assets/platinum.png">
-                <input data-value="1500000" class="amount" type="number" id="platinum">
-            </li>
-            <li>
-                <img src="../assets/gold.png">
-                <input data-value="1000000" class="amount" type="number" id="gold">
-            </li>
-            <li>
-                <img src="../assets/silver.png">
-                <input data-value="500000" class="amount" type="number" id="silver">
-            </li>
-            <li>
-                <img src="../assets/bronze.png">
-                <input data-value="250000" class="amount" type="number" id="bronze">
-            </li>
-            <li style="margin-top: 15px;">
-                <img src="../assets/zeni.png" id="zenipng">
-                <input type="text" disabled id="zenis">
-            </li>
-        </ol>
+        <div id="statues-container" class="container">
+            <span class="title">
+                <img src="../assets/com_arrow_large_right.png" alt width="16">
+                Calculateur de Zenis
+                <img src="../assets/com_arrow_large_left.png" alt width="16">
+            </span>
+            <div class="statue-item">
+                <img id="counter-thumbnail" src="../assets/zeni.png">
+                <input id="counter" class="amount" type="number" placeholder="Zenis sur le compteur." data-value="1">
+            </div>
+            <div class="statue-item">
+                <img class="statue-item-thumbnail" src="../assets/diamond.png">
+                <input id="diamond" class="amount" type="number" data-value="5000000">
+            </div>
+            <div class="statue-item">
+                <img class="statue-item-thumbnail" src="../assets/platinum.png">
+                <input id="platinum" class="amount" type="number" data-value="1500000">
+            </div>
+            <div class="statue-item">
+                <img class="statue-item-thumbnail" src="../assets/gold.png">
+                <input id="gold" class="amount" type="number" data-value="1000000">
+            </div>
+            <div class="statue-item">
+                <img class="statue-item-thumbnail" src="../assets/silver.png">
+                <input id="silver" class="amount" type="number" data-value="500000">
+            </div>
+            <div class="statue-item">
+                <img class="statue-item-thumbnail" src="../assets/bronze.png">
+                <input id="bronze" class="amount" type="number" data-value="250000">
+            </div>
+            <div class="statue-item" style="margin-top: 10px;">
+                <img id="total-thumbnail" src="../assets/sell_icon.png" id="zenipng">
+                <input id="total" type="text" placeholder="Zenis totaux." disabled>
+            </div>
+        </div>
+        <div id="awakenscalc" class="container">
+            <div id="nav">
+                <div class="btn-wrapper">
+                    <div class="btn">Éveils</div>
+                    <div class="btn-background"></div>
+                </div>
+                <div class="btn-wrapper">
+                    <div class="btn">ZTUR</div>
+                    <div class="btn-background"></div>
+                </div>
+                <div class="btn-wrapper">
+                    <div class="btn">ZLR</div>
+                    <div class="btn-background"></div>
+                </div>
+            </div>
+            <div id="awakens-wrapper">
+                <span class="title">
+                    <img src="../assets/com_arrow_large_right.png" alt width="16">
+                    <!-- mettre titre en fonction du choix de menu -->
+                    <img src="../assets/com_arrow_large_left.png" alt width="16">
+                </span>
+            </div>
+        </div>
     </div>
     <script>
         function separatedNumber(number) {
             return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
         }
-        const fields = document.querySelectorAll('.amount')
-        document.addEventListener('input', (e) => {
-            if (e.target.classList.contains('amount')) {
-                let zenis = 0
-                fields.forEach((field) => {
-                    if (field.value) {
-                        zenis += parseInt(field.getAttribute('data-value')) * field.value
-                    }
-                })
-                document.querySelector('#zenis').value = separatedNumber(zenis)
-            }
-        })
-
-    </script>
-    <script>
-        let root = document.documentElement;
+        
         function updateSizes(height, width) {
             root.style.setProperty('--input-height', `${height / 10.33928571428}px`);
             root.style.setProperty('--input-width', `${width / 4.13}px`)
@@ -66,26 +83,41 @@
             if (document.querySelector('.amount').offsetHeight > (width / 15.4875 / 1.143478260869)) {
                 root.style.setProperty('--image-width', `${height / 8.275923913040 * 1.143478260869}px`)
                 root.style.setProperty('--image-height', `${height / 8.275923913040}px`)
-
+        
             } else {
                 root.style.setProperty('--image-width', `${width / 15.4875}px`);
                 root.style.setProperty('--image-height', `${width / 15.4875 / 1.143478260869}px`)
-
+        
             }
         }
-        //        window.onload = updateSizes(window.innerHeight, window.innerWidth)
-        window.onload = updateSizes(window.innerHeight, window.innerWidth)
-
-        window.addEventListener("resize", (e) => {
-            //if (window.innerHeight <= document.querySelector('#container').offsetHeight){
-            updateSizes(window.innerHeight, window.innerWidth)
-            //}
-
-        })
+        
+        const fields = document.querySelectorAll('.amount')
+        let root = document.documentElement;
         const blocked = [".", ",", "e", "E"]
+        
+        window.onload = updateSizes(window.innerHeight, window.innerWidth)
+        
+        document.addEventListener('input', (e) => {
+            if (e.target.classList.contains('amount')) {
+                let zenis = 0
+                fields.forEach((field) => {
+                    console.dir(field)
+                    if (field.value) {
+                        zenis += parseInt(field.getAttribute('data-value')) * parseInt(field.value)
+                    }
+                })
+                document.querySelector('#total').value = separatedNumber(zenis)
+            }
+        })
+        
+        window.addEventListener("resize", (e) => {
+            updateSizes(window.innerHeight, window.innerWidth)
+        
+        })
+        
         document.addEventListener("keydown", (e) => {
             if (blocked.includes(e.key)) {
-                event.preventDefault();
+                e.preventDefault();
             }
         });
     </script>
