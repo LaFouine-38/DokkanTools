@@ -10,7 +10,7 @@
 }
 
 html {
-    font-size: 10px;
+    font-size: 14px/*62.5%*/;
 }
 
 body, html {
@@ -20,7 +20,7 @@ body, html {
     min-width: min-content;
     font-family: "Source Sans Pro", sans-serif;
 }
-/* =========== CONTAINERS ===========*/
+
 div#main {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -33,22 +33,46 @@ div#main {
     row-gap: 20px;
 }
 
-.container {
-    min-width: min-content;
-    width: 80%;
+
+.wrapper {
+    max-width: 96%;
+    width: 96%;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
     background-color: var(--container-bg-color);
-    padding: 10px; 
+    padding: 2rem 0.8rem;
+    /* margin: 0px auto 4rem; */
+}
+
+.container{
+    display: flex;
+}
+
+div#statues-wrapper{
+    background-color: var(--container-bg-color);    
+}
+
+div#statue-container{
+    min-width: 100%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    flex-basis: 100%;
+}
+
+div#awakens-container{
+    flex-direction: column;
 }
 
 .statue-item {
+    width: 100%;
     margin-top: 5px;
     margin-bottom: 5px;
     display: flex;
     position: relative;
     align-items: flex-end;
+    justify-content: center;
     flex-basis: 0;
 }
 
@@ -56,7 +80,7 @@ div#main {
 /* =========== THUMBNAILS ===========*/
 img#counter-thumbnail, img#total-thumbnail, .statue-item-thumbnail{
     position: relative;
-    z-index: 2;
+    /* z-index: 2; */
     width: 8vw;
     min-width: 50px;
     height: auto;
@@ -64,23 +88,26 @@ img#counter-thumbnail, img#total-thumbnail, .statue-item-thumbnail{
 
 /* =========== INPUTS ============*/
 input#total, .amount{
-    /*taille*/
     height: 87.5%;
-    min-width: 100px;
+    min-width: min-content;
+    max-width: 235px;
     width: 100%;
     padding-left: 10px;
 
-    /*position*/
     position: relative;
-    z-index: 1;
+    /* z-index: 1; */
 
-    /*border*/
     border-radius: 10px;
     border-width: 0;
+    flex-grow: 1;
 }
 
 input#total,#total::placeholder {
     color: white;
+}
+
+input#total:hover{
+    cursor: not-allowed;
 }
 
 div#nav {
@@ -90,6 +117,7 @@ div#nav {
     justify-content: center;
     width: 100%;
     height: 5vh;
+    min-height: 30px;
     top:0;
     column-gap: 10px;
     margin-bottom: 10px;
@@ -102,7 +130,7 @@ div.btn-wrapper{
     height: 100%;
     justify-content: center;
     align-items: center;
-    
+    max-width: 175px;
 }
 
 div.btn-wrapper:hover{
@@ -113,7 +141,7 @@ div.btn{
     display: block;
     position: relative;
     z-index: 1;
-
+    font-size: 1.4rem;
 }
 
 div.btn-background{
@@ -135,14 +163,120 @@ span.title{
     align-items: center;
     -webkit-box-pack: center;
     justify-content: center;
-    margin-bottom: 2rem;
+
     position: relative;
-    margin-top: 10px;
 }
 
-span.title img{
+span.title img.arrow {
     margin: 0 14px;
 }
+
+img#ztur-awakening{
+    width: 25vw;
+    height:auto;
+    min-width: 83px;
+    max-width: 120px;
+}
+
+img#zlr-awakening{
+    width: 19vw;
+    height:auto;
+    min-width: 71px;
+    max-width: 90px;
+}
+
+div.awaken-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    margin-top: 30px;
+}
+
+div.awaken-item p {
+    font-size: 1.1rem;
+    color: white;
+    align-self: flex-start;
+}
+
+@media screen and (min-width: 576px){
+    div#statue-container{
+        flex-direction: row;
+        justify-content: center;
+        column-gap: 10px;
+    }
+
+    .statue-item{
+        flex-basis: calc(50% - 10px);
+    }
+
+    input#total, .amount{
+        font-size: 1.3rem;
+        max-width: none;
+    }
+
+}
+
+@media screen and (min-width: 600px){
+    
+    span.title{
+        font-size: 1.4rem;
+    }
+
+    input#total, .amount{
+        max-width: 250px;
+    }
+
+}
+
+@media screen and (min-width: 768px) {
+    .wrapper{
+        max-width: 80%
+    }
+
+    input#total, .amount{
+        max-width: 335px;
+    }
+
+    img#counter-thumbnail, img#total-thumbnail, .statue-item-thumbnail{
+        max-width: 85px;
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .wrapper{
+        max-width: 70%;
+        padding: 2rem 2.8rem;
+    }
+
+    img#counter-thumbnail, img#total-thumbnail, .statue-item-thumbnail{
+        max-width: 85px;
+    }
+
+    input#total, .amount{
+        max-width: 370px;
+    }
+}
+
+@media screen and (min-width: 1720px){
+    .wrapper{
+        padding: 2rem 7.8rem;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .wrapper{
+        max-width: 60%
+    }
+    
+    input#total, .amount{
+        font-size: 1.7rem;
+    }
+}
+
+
+
 
 /* TODO - Faire le menu nav du coté
         - Terminer le css de awakenscalc
