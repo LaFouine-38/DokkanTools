@@ -56,41 +56,18 @@
                 <img class="arrow" src="../assets/com_arrow_large_left.png" alt width="16">
             </span>
             <div id="nav">
-                <div class="btn-wrapper">
+                <!-- mettre les wrappers en width 100% -->
+                <div data-value="ztur" class="btn-wrapper">
                     <div class="btn">ZTUR</div>
                     <div class="btn-background"></div>
                 </div>
-                <div class="btn-wrapper">
+                <div data-value="zlr" class="btn-wrapper">
                     <div class="btn">ZLR</div>
                     <div class="btn-background"></div>
                 </div>
             </div>
             <hr>
             <div id="awakens-container" class="container">
-                <div class="awaken-item">
-                    <span class="title">
-                        <img class="arrow" src="../assets/com_arrow_large_right.png" alt width="16">
-                        <img id="ztur-awakening" src="../assets/ztur.png" alt>
-                        <img class="arrow" src="../assets/com_arrow_large_left.png" alt width="16">
-                    </span>
-                    <div class="text-wrapper">
-                        <p></p>
-                        <p></p>
-                        <p></p>
-                    </div>
-                </div>
-                <div class="awaken-item">
-                    <span class="title">
-                        <img class="arrow" src="../assets/com_arrow_large_right.png" alt width="16">
-                        <img id="zlr-awakening" src="../assets/zlr.png" alt>
-                        <img class="arrow" src="../assets/com_arrow_large_left.png" alt width="16">
-                    </span>
-                    <div class="text-wrapper">
-                        <p></p>
-                        <p></p>
-                        <p></p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -99,15 +76,49 @@
             return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
         }
 
-        const fields = document.querySelectorAll('.amount')
-        let root = document.documentElement;
-        const blocked = [".", ",", "e", "E"]
+        function divide(zenis, option){
+            let result;
+            let remain;
+            if (option == 'ztur'){
+                result = Math.floor(zenis / 30500000)
+                remain = zenis % 30500000
+            } else if (option == 'subztur'){
+                result = Math.floor(zenis / 13600000)
+                remain = zenis % 13600000             
+            } else if (option == 'zlr'){
+                result = Math.floor(zenis / 34999965)
+                remain = zenis % 34999965
+            }
+            return !remain || remain === separatedNumber(result) ? result : `${separatedNumber(result)} reste ${separatedNumber(remain)} Zenis`
+        }
 
-        window.onload = updateSizes(window.innerHeight, window.innerWidth)
+        function generateAwakenItem(zenis, option){
+            return `<div class="awaken-item">
+                <span class="title">
+                    <img class="arrow" src="../assets/com_arrow_large_right.png" alt width="16">
+                    <img id="${option === 'zlr' ? 'zlr' : 'ztur'}-awakenings" src="../assets/${option === 'zlr' ? 'zlr' : 'ztur'}.png" alt>
+                    <img class="arrow" src="../assets/com_arrow_large_left.png" alt width="16">
+                </span>
+                <div class="text-wrapper">
+                    <p>${option === 'zlr' ? 'Éveils ZLR disponibles: ' + divide(zenis, 'subztur') : 'Éveils de ZTUR disponibles: ' + divide(zenis, 'subztur')}</p>
+                    ${option === 'zlr' ? '<p></p>' : `<p>Éveils de SUB-ZTUR disponibles: ${divide(zenis, 'subztur')}</p>`}
+                </div>
+            </div>`
+        }
+
+        let awakenOptions = 'ztur';
+
+        const fields = document.querySelectorAll('.amount');
+        let root = document.documentElement;
+        const blocked = [".", ",", "e", "E"];
+        const awakensWrapper = document.querySelector('#awakens-wrapper');
+        const awakensContainer = document.querySelector('#awakens-container');
+        let zenis;   
 
         document.addEventListener('input', (e) => {
+            console.log(awakenOptions)
             if (e.target.classList.contains('amount')) {
-                let zenis = 0
+                zenis = 0;
                 fields.forEach((field) => {
                     console.dir(field)
                     if (field.value) {
@@ -115,6 +126,12 @@
                     }
                 })
                 document.querySelector('#total').value = separatedNumber(zenis)
+                if (zenis !== 0){
+                    awakensWrapper.style.display = 'flex'
+                    awakensContainer.innerHTML = generateAwakenItem(zenis, awakenOptions)
+                } else {
+                    awakensWrapper.style.display = 'none'
+                }
             }
         })
 
@@ -123,6 +140,18 @@
                 e.preventDefault();
             }
         });
+
+        document.addEventListener('click', (e) => {
+            if (e.target.parentNode.classList.contains('btn-wrapper')){
+                if (e.target.parentNode.getAttribute('data-value') === 'ztur'){
+                    awakenOptions = 'ztur'
+                } else if (e.target.parentNode.getAttribute('data-value') === 'zlr') {
+                    awakenOptions = 'zlr'
+                }
+                console.dir(e.target.parentNode)
+                awakensContainer.innerHTML = generateAwakenItem(zenis, awakenOptions)
+            }
+        })
     </script>
 </body>
 

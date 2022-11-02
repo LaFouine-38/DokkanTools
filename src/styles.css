@@ -53,6 +53,10 @@ div#statues-wrapper{
     background-color: var(--container-bg-color);    
 }
 
+div#awakens-wrapper{
+    display: none; /*defini sur flex avec le js*/
+}
+
 div#statue-container{
     min-width: 100%;
     flex-direction: column;
@@ -131,6 +135,7 @@ div.btn-wrapper{
     justify-content: center;
     align-items: center;
     max-width: 175px;
+    z-index: 100;
 }
 
 div.btn-wrapper:hover{
@@ -138,10 +143,13 @@ div.btn-wrapper:hover{
 }
 
 div.btn{
-    display: block;
+    display: flex;
     position: relative;
     z-index: 1;
     font-size: 1.4rem;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 div.btn-background{
@@ -171,14 +179,14 @@ span.title img.arrow {
     margin: 0 14px;
 }
 
-img#ztur-awakening{
+img#ztur-awakenings{
     width: 25vw;
     height:auto;
     min-width: 83px;
     max-width: 120px;
 }
 
-img#zlr-awakening{
+img#zlr-awakenings{
     width: 19vw;
     height:auto;
     min-width: 71px;
