@@ -83,6 +83,7 @@
                 result = Math.floor(zenis / 30500000)
                 remain = zenis % 30500000
             } else if (option == 'subztur'){
+                console.log('sub')
                 result = Math.floor(zenis / 13600000)
                 remain = zenis % 13600000             
             } else if (option == 'zlr'){
@@ -100,7 +101,7 @@
                     <img class="arrow" src="../assets/com_arrow_large_left.png" alt width="16">
                 </span>
                 <div class="text-wrapper">
-                    <p>${option === 'zlr' ? 'Éveils ZLR disponibles: ' + divide(zenis, 'subztur') : 'Éveils de ZTUR disponibles: ' + divide(zenis, 'subztur')}</p>
+                    <p>${option === 'zlr' ? 'Éveils ZLR disponibles: ' + divide(zenis, 'zlr') : 'Éveils de ZTUR disponibles: ' + divide(zenis, 'ztur')}</p>
                     ${option === 'zlr' ? '<p></p>' : `<p>Éveils de SUB-ZTUR disponibles: ${divide(zenis, 'subztur')}</p>`}
                 </div>
             </div>`
