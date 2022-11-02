@@ -1,10 +1,7 @@
 # Dokkan (pas d'idée)
 
 - Calculateur de la valeur des statues de satan
-
-## Petite précision.
-
-Sur mobile il peut y avoir quelques problemes d'affichage.
+- Désormais supporté sur tous les écrans
 
 
 ## Comment l'utiliser ?
