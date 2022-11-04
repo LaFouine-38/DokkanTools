@@ -1,4 +1,4 @@
-# Dokkan (pas d'idée)
+# Calculateurs Dokkan
 
 - Calculateur de la valeur des statues de satan
 - Désormais supporté sur tous les écrans
