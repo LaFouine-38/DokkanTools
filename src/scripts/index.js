@@ -9,7 +9,6 @@ function divide(zenis, option) {
         result = Math.floor(zenis / 30500000)
         remain = zenis % 30500000
     } else if (option == 'subztur') {
-        console.log('sub')
         result = Math.floor(zenis / 13600000)
         remain = zenis % 13600000
     } else if (option == 'zlr') {
@@ -47,14 +46,13 @@ document.addEventListener('input', (e) => {
     if (e.target.classList.contains('amount')) {
         zenis = 0;
         fields.forEach((field) => {
-            console.dir(field)
             if (field.value) {
                 zenis += parseInt(field.getAttribute('data-value')) * parseInt(field.value)
             }
         })
         document.querySelector('#total').value = separatedNumber(zenis)
         if (zenis !== 0) {
-            awakensWrapper.style.display = 'flex'
+            awakensWrapper.style.display = 'block'
             awakensContainer.innerHTML = generateAwakenItem(zenis, awakenOptions)
         } else {
             awakensWrapper.style.display = 'none'
@@ -69,13 +67,12 @@ document.addEventListener("keydown", (e) => {
 });
 
 document.addEventListener('click', (e) => {
-    if (e.target.parentNode.classList.contains('btn-wrapper')) {
-        if (e.target.parentNode.getAttribute('data-value') === 'ztur') {
+    if (e.target.classList.contains('btn')){
+        if (e.target.getAttribute('data-value') === 'ztur') {
             awakenOptions = 'ztur'
-        } else if (e.target.parentNode.getAttribute('data-value') === 'zlr') {
+        } else if (e.target.getAttribute('data-value') === 'zlr') {
             awakenOptions = 'zlr'
         }
-        console.dir(e.target.parentNode)
         awakensContainer.innerHTML = generateAwakenItem(zenis, awakenOptions)
     }
 })

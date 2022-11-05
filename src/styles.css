@@ -33,12 +33,18 @@ div#main {
     row-gap: 20px;
 }
 
+div#menu-icon{
+    position: fixed;
+    left: 2rem;
+    top: 10px;
+    cursor: pointer;
+    z-index: 50;
+}
 
 .wrapper {
     max-width: 96%;
     width: 96%;
-    display: flex;
-    flex-direction: column;
+    display:block;
     border-radius: 10px;
     background-color: var(--container-bg-color);
     padding: 2rem 0.8rem;
@@ -54,7 +60,8 @@ div#statues-wrapper{
 }
 
 div#awakens-wrapper{
-    display: none; /*defini sur flex avec le js*/
+    display: none;
+    margin-bottom: 50px;
 }
 
 div#statue-container{
@@ -63,6 +70,7 @@ div#statue-container{
     flex-wrap: wrap;
     align-content: center;
     flex-basis: 100%;
+    margin-top: 2rem;
 }
 
 div#awakens-container{
@@ -81,7 +89,6 @@ div#awakens-container{
 }
 
 
-/* =========== THUMBNAILS ===========*/
 img#counter-thumbnail, img#total-thumbnail, .statue-item-thumbnail{
     position: relative;
     /* z-index: 2; */
@@ -90,7 +97,6 @@ img#counter-thumbnail, img#total-thumbnail, .statue-item-thumbnail{
     height: auto;
 }
 
-/* =========== INPUTS ============*/
 input#total, .amount{
     height: 87.5%;
     min-width: min-content;
@@ -127,39 +133,39 @@ div#nav {
     margin-bottom: 10px;
 }
 
-div.btn-wrapper{
+div.btn{
     position: relative;
-    display: flex;
+    display: block;
     width: 100%;
     height: 100%;
-    justify-content: center;
-    align-items: center;
     max-width: 175px;
-    z-index: 100;
+    z-index:1;
+    font-size: 1.4rem;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-div.btn-wrapper:hover{
+div.btn:hover{
     cursor: pointer;
 }
 
-div.btn{
-    display: flex;
-    position: relative;
-    z-index: 1;
-    font-size: 1.4rem;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-}
-
-div.btn-background{
-    border-radius: 10px;
-    display: block;
+div.btn::before{
+    content: '';
     position: absolute;
-    z-index: 0;
-    background-color: aquamarine;
+    z-index: -1;
+    background-color: rgb(29, 38, 47);
     height: 100%;
     width: 100%;
+}
+
+div.btn p {
+    color: white;
+    height : fit-content;
+    width : fit-content;
+    margin : auto;
+    position : absolute;
+    inset: 0;
+    pointer-events: none;
 }
 
 span.title{
@@ -171,7 +177,7 @@ span.title{
     align-items: center;
     -webkit-box-pack: center;
     justify-content: center;
-
+    margin-bottom: 2rem;
     position: relative;
 }
 
@@ -205,6 +211,7 @@ div.awaken-item p {
     font-size: 1.1rem;
     color: white;
     align-self: flex-start;
+    margin-bottom: 1rem;
 }
 
 @media screen and (min-width: 576px){
@@ -284,10 +291,6 @@ div.awaken-item p {
 }
 
 
-
-
-/* TODO - Faire le menu nav du coté
-        - Terminer le css de awakenscalc
-        - Faire tout le responsive
-        - Faire le js
-*/
+/* refactor les btn-wrapper avec les ::before/after */
+/* voir certaines marges en rem */ 
+/* revoir un tuto flexboxes */
