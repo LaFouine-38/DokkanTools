@@ -1,0 +1,296 @@
+:root{
+    --global-bg-color: rgb(4, 9, 12);
+    --container-bg-color: rgb(22, 27, 37);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 14px/*62.5%*/;
+}
+
+body, html {
+    background-color: var(--global-bg-color);
+    width: 100%;
+    height: 100%;
+    min-width: min-content;
+    font-family: "Source Sans Pro", sans-serif;
+}
+
+div#main {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+div#menu-icon{
+    position: fixed;
+    left: 2rem;
+    top: 10px;
+    cursor: pointer;
+    z-index: 50;
+}
+
+.wrapper {
+    max-width: 96%;
+    width: 96%;
+    display:block;
+    border-radius: 10px;
+    background-color: var(--container-bg-color);
+    padding: 2rem 0.8rem;
+    /* margin: 0px auto 4rem; */
+}
+
+.container{
+    display: flex;
+}
+
+div#statues-wrapper{
+    background-color: var(--container-bg-color);    
+}
+
+div#awakens-wrapper{
+    display: none;
+    margin-bottom: 50px;
+}
+
+div#statue-container{
+    min-width: 100%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    flex-basis: 100%;
+    margin-top: 2rem;
+}
+
+div#awakens-container{
+    flex-direction: column;
+}
+
+.statue-item {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    position: relative;
+    align-items: flex-end;
+    justify-content: center;
+    flex-basis: 0;
+}
+
+
+img#counter-thumbnail, img#total-thumbnail, .statue-item-thumbnail{
+    position: relative;
+    /* z-index: 2; */
+    width: 8vw;
+    min-width: 50px;
+    height: auto;
+}
+
+input#total, .amount{
+    height: 87.5%;
+    min-width: min-content;
+    max-width: 235px;
+    width: 100%;
+    padding-left: 10px;
+
+    position: relative;
+    /* z-index: 1; */
+
+    border-radius: 10px;
+    border-width: 0;
+    flex-grow: 1;
+}
+
+input#total,#total::placeholder {
+    color: white;
+}
+
+input#total:hover{
+    cursor: not-allowed;
+}
+
+div#nav {
+    position: relative;
+    display: inline-flex;
+    align-self: center;
+    justify-content: center;
+    width: 100%;
+    height: 5vh;
+    min-height: 30px;
+    top:0;
+    column-gap: 10px;
+    margin-bottom: 10px;
+}
+
+div.btn{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 175px;
+    z-index:1;
+    font-size: 1.4rem;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+div.btn:hover{
+    cursor: pointer;
+}
+
+div.btn::before{
+    content: '';
+    position: absolute;
+    z-index: -1;
+    background-color: rgb(29, 38, 47);
+    height: 100%;
+    width: 100%;
+}
+
+div.btn p {
+    color: white;
+    height : fit-content;
+    width : fit-content;
+    margin : auto;
+    position : absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+span.title{
+    color: white;
+    display: flex;
+    text-align: center;
+    font-size: 1.2rem;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+span.title img.arrow {
+    margin: 0 14px;
+}
+
+img#ztur-awakenings{
+    width: 25vw;
+    height:auto;
+    min-width: 83px;
+    max-width: 120px;
+}
+
+img#zlr-awakenings{
+    width: 19vw;
+    height:auto;
+    min-width: 71px;
+    max-width: 90px;
+}
+
+div.awaken-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    margin-top: 30px;
+}
+
+div.awaken-item p {
+    font-size: 1.1rem;
+    color: white;
+    align-self: flex-start;
+    margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 576px){
+    div#statue-container{
+        flex-direction: row;
+        justify-content: center;
+        column-gap: 10px;
+    }
+
+    .statue-item{
+        flex-basis: calc(50% - 10px);
+    }
+
+    input#total, .amount{
+        font-size: 1.3rem;
+        max-width: none;
+    }
+
+}
+
+@media screen and (min-width: 600px){
+    
+    span.title{
+        font-size: 1.4rem;
+    }
+
+    input#total, .amount{
+        max-width: 250px;
+    }
+
+}
+
+@media screen and (min-width: 768px) {
+    .wrapper{
+        max-width: 80%
+    }
+
+    input#total, .amount{
+        max-width: 335px;
+    }
+
+    img#counter-thumbnail, img#total-thumbnail, .statue-item-thumbnail{
+        max-width: 85px;
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .wrapper{
+        max-width: 70%;
+        padding: 2rem 2.8rem;
+    }
+
+    img#counter-thumbnail, img#total-thumbnail, .statue-item-thumbnail{
+        max-width: 85px;
+    }
+
+    input#total, .amount{
+        max-width: 370px;
+    }
+}
+
+@media screen and (min-width: 1720px){
+    .wrapper{
+        padding: 2rem 7.8rem;
+    }
+}
+
+@media screen and (min-width: 1920px) {
+    .wrapper{
+        max-width: 60%
+    }
+    
+    input#total, .amount{
+        font-size: 1.7rem;
+    }
+}
+
+
+/* refactor les btn-wrapper avec les ::before/after */
+/* voir certaines marges en rem */ 
+/* revoir un tuto flexboxes */

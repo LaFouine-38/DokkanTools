@@ -1,0 +1,4 @@
+27/02/24 16h36
+- je ne sais plus ce que sont unused.html, stylesDesk/Old.css
+- styles.css est le styles.css présent dans src au moment ou j'écris ces lignes
+- index.html est la première version du site (pas responsive du tout, c'était géré en js a l'arrache)
