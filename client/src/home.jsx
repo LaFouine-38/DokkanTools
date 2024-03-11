@@ -1,8 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import MainBox from './components/MainBox.jsx'; // Importez votre composant principal
-import MainBoxContainer from './components/MainBoxContainer.jsx';
-import MainTitle from './components/MainTitle.jsx';
+import MainBox from './shared/components/MainBox.jsx'; // Importez votre composant principal
+import MainBoxContainer from './shared/components/MainBoxContainer.jsx';
+import MainTitle from './shared/components/MainTitle.jsx';
 import { Grid, Paper } from '@mui/material'
 
 export default function Home() {

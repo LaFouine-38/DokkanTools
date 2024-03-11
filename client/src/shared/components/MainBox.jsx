@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import makeStyles from '@mui/styles/makeStyles';
 const useStyles = makeStyles({
   "MainBox": {
     padding: '2rem 0.8rem',

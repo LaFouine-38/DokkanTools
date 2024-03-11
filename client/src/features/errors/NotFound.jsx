@@ -1,11 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import MainBox from '../components/MainBox.jsx'; // Importez votre composant principal
-import MainBoxContainer from '../components/MainBoxContainer.jsx';
-import MainTitle from '../components/MainTitle.jsx';
-import { Grid, Paper } from '@mui/material'
+import MainBox from '../../shared/components/MainBox'; // Importez votre composant principal
+import MainBoxContainer from '../../shared/components/MainBoxContainer';
+import MainTitle from '../../shared/components/MainTitle';
 import { Link } from 'react-router-dom';
-import Home from '../home.jsx';
 
 export default function Calc() {
     return (

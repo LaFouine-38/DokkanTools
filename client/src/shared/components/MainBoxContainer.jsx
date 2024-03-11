@@ -1,15 +1,13 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
-const useStyles = makeStyles({
+import makeStyles from '@mui/styles/makeStyles';
+const useStyles = makeStyles((theme)=>({
   "MainBoxContainer": {
     boxSizing: 'border-box',
     padding: '10px',
     minHeight: 'calc(-100px + 100vh)',
     width: '100%',
   }
-
-
-});
+}));
 /**
  * Le conteneur de la box centrale/de la flèche de retour en haut
  *

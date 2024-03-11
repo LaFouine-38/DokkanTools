@@ -1,6 +1,5 @@
 /unused/
-*/node_modules
-
+**/node_modules
 /server/API/database/*
 !/server/API/database/notes.md
 !/server/API/database/README.md

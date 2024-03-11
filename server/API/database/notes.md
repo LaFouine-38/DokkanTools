@@ -107,7 +107,6 @@ rm = bataille royale
 -   **<span id="missions.type">type</span>**: type de missions
 -   **<span id="missions.name">name</span>**: nom de la mission
 
-
 # eventkagi_items
 
 > liste des clés
@@ -123,3 +122,57 @@ rm = bataille royale
 > niveaux (une entrée/ligne = un niveau du jeu)
 
 -   **<span id="quests.area_id">area_id</span>**: id de l'event du niveau/zone de quête ([areas](#areas).[id](#areas.id))
+
+# cards
+
+> cartes du jeu
+
+-   **<span id="cards.id">id</span>**: id de la carte
+-   <details>
+    <summary><strong><span id="cards.element">element</span></strong>: type de la carte</summary>
+
+    > [!NOTE]
+    > le type suit ce format XX (Classe_numType_num) ex: INT = 2 / super INT = 12
+
+    -   <details>
+        <summary>BASE</summary>
+
+        -   AGI: `00`
+        -   TEC: `01`
+        -   INT: `02`
+        -   PUI: `03`
+        -   END: `04`
+        </details>
+
+    -   <details>
+        <summary>SUPER</summary>
+
+        -   AGI: `10`
+        -   TEC: `11`
+        -   INT: `12`
+        -   PUI: `13`
+        -   END: `14`
+        </details>
+
+    -   <details>
+        <summary>EXTREME</summary>
+
+        -   AGI: `20`
+        -   TEC: `21`
+        -   INT: `22`
+        -   PUI: `23`
+        -   END: `24`
+        </details>
+
+    </details>
+-   <details>
+    <summary><strong><span id="cards.rarity">rarity</span></strong>: rareté de la carte</summary>
+
+    -   N: `0`
+    -   R: `1`
+    -   SR: `2`
+    -   SSR: `3`
+    -   UR: `4`
+    -   LR: `5`
+
+    </details>
