@@ -1,4 +1,4 @@
-import React, { useCallback, memo } from 'react'
+import React from 'react'
 import TextField from '@mui/material/TextField'
 import Grid from '@mui/material/Grid'
 import IconThumb from 'shared/components/thumbs/IconThumb'
@@ -22,7 +22,7 @@ interface CustomSellableItemProps extends JSX.Element{
     onInput: (event: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
-export default memo(function CustomSellableItem({ index, item, onInput, ...props}: CustomSellableItemProps): JSX.Element {
+export default function CustomSellableItem({ index, item, onInput, ...props}: CustomSellableItemProps): JSX.Element {
     const sx = styleSheet.CustomSellableItem;
 
     const { updateSellableItem } = useCalculatorContext();
@@ -31,12 +31,12 @@ export default memo(function CustomSellableItem({ index, item, onInput, ...props
       updateSellableItem(index, { value: event.target.value || 0, dataValue: item.value});
     };
 
-    const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    const handleKeyDown = (e: React.KeyboardEvent) => {
         const key = e.key;
         if (key === "e" || key === "E" || key === "-" || key === "+") {
             e.preventDefault();
         }
-    }, []);
+    };
 
     return (
         <Grid sx={sx} xs={2} sm={4} lg={6} item>
@@ -44,4 +44,4 @@ export default memo(function CustomSellableItem({ index, item, onInput, ...props
             <TextField onKeyDown={handleKeyDown} type='number' onChange={handleChange} inputProps={{'data-value': item.value}} label={item.value} variant='outlined' fullWidth />
         </Grid>
     );
-})
+}
