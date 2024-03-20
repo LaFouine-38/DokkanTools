@@ -1,6 +1,7 @@
 Roadmap:
-- [ ] - Optimiser le build de l'app
+- [x] - ~~Optimiser le build de l'app~~
+    - avec webpack le build est long, par contre il est opti niveau chunks etc (opti client)
 - [ ] - Commencer l'api
-- [ ] - Refaire le calculateur de zenis
+- [x] - ~~Refaire le calculateur de zenis~~
 - [ ] - Commencer à dev l'outil de filtrage des missions
-- [ ] - Optimisations client si nécéssaire
+- [ ] - Optimisations client (au niveau du react) si nécéssaire
