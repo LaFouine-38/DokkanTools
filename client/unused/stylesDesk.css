@@ -1,0 +1,72 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+div#main {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+div#statues-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.statue-item {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    position: relative;
+    align-items: flex-end;
+}
+
+img#counter-thumbnail, img#total-thumbnail, .statue-item-thumbnail{
+    position: relative;
+    z-index: 2;
+}
+
+.statue-item-thumbnail {
+    width: auto;
+    max-height: 14.0709667278vh;
+}
+
+img#counter-thumbnail{
+    width: auto;
+    max-height: 12.02027773286vh;
+    position: relative;
+    right: 3px;
+}
+
+img#total-thumbnail{
+    max-width: 6.5vw;
+    height: auto;
+}
+
+input#zenis, .amount{
+    min-width: 25vw;
+    height: 87.5%;
+    position: relative;
+    z-index: 1;
+    /*height: img width / 1,4285714285714285714285714285714*/
+    border-radius: 20px;
+    border-style: 2px black;
+}
+
+input#zenis {
+    margin-left: 0.484261501210vw;
+    margin-bottom: 1.208981001727vh;
+}
+
+
+div#awakenscalc {}
