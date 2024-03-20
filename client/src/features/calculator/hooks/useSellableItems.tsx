@@ -5,7 +5,6 @@ export const useSellableItems = () => {
   const [sellableItems, setSellableItems] = useState(sellableItemsData);
 
   useEffect(() => {
-    console.log('useeffect sellableItems');
     setSellableItems(prevSellableItems => prevSellableItems);
   }, []); 
 

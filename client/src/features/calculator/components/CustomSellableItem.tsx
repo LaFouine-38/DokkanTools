@@ -1,7 +1,7 @@
 import React, { useCallback, memo } from 'react'
 import TextField from '@mui/material/TextField'
 import Grid from '@mui/material/Grid'
-import IconThumb from 'shared/components/IconThumb'
+import IconThumb from 'shared/components/thumbs/IconThumb'
 import { SellableItem } from 'typings/SellableItem'
 import { useCalculatorContext } from '../hooks/useSellableContext'
 
@@ -24,7 +24,6 @@ interface CustomSellableItemProps extends JSX.Element{
 
 export default memo(function CustomSellableItem({ index, item, onInput, ...props}: CustomSellableItemProps): JSX.Element {
     const sx = styleSheet.CustomSellableItem;
-    console.log(index, 'rendered');
 
     const { updateSellableItem } = useCalculatorContext();
 
