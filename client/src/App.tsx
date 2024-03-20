@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from 'react'
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import ThemeProvider from '@mui/styles/ThemeProvider'
 import theme from './theme/theme';
-const Home = lazy(() => import(/* webpackChunkName: "home" */ './Home.jsx'));
+const Home = lazy(() => import(/* webpackChunkName: "home" */ './features/home/Home.jsx'));
 const Calc = lazy(() => import(/* webpackChunkName: "calc" */ './features/calculator/SellableItemsCalculatorPage'));
 const Test = lazy(() => import(/* webpackChunkName: "test" */ './features/test/Test'));
 const NotFound = lazy(() => import(/* webpackChunkName: "notfound" */ './features/errors/NotFound'));
