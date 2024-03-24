@@ -6,7 +6,7 @@ module.exports = {
         rootName: "api",
         port: 25607,
         cors: {
-            allowedDomains:  []
+            allowedDomains:  ["http://localhost:3000"]
         }
     }
 }

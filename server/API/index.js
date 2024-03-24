@@ -21,6 +21,10 @@ app.listen(config.api.port, () => {
 const buildPath = path.join(__dirname, './../../client/build/');
 app.use(express.static(buildPath));
 
+app.get(`/${config.api.rootName}/*`, (req, res) => {
+    res.status(404)
+});
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(buildPath, 'index.html'));
 });

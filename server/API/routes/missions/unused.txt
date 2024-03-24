@@ -1,0 +1,242 @@
+/**
+ * route pour avoir tous les items des rewards des missions limitées actuellement dispo
+ */
+router.get(`/mission-reward-items/names/limited/available`, async (req, res) => {
+    let data = req.body;
+
+    let caseClause = '';
+    (await executeSelect(`SELECT DISTINCT item_type FROM mission_rewards JOIN missions ON mission_rewards.mission_id = missions.id
+    JOIN mission_categories ON missions.mission_category_id = mission_categories.id
+    WHERE mission_categories.type = 'MissionCategory::ExtraMissionCategory'`)).forEach(row => {
+        console.log(row.item_type, getItemTableFromType(row.item_type));
+        caseClause += `
+            WHEN mission_rewards.item_type = '${row.item_type}' THEN 
+                (SELECT 
+                    CASE 
+                        WHEN '${getItemTableFromType(row.item_type)}' IN (SELECT sqlite_master.name
+                            FROM sqlite_master
+                            WHERE sqlite_master.name='${getItemTableFromType(row.item_type)}' AND type='table') THEN 
+                            (SELECT ${getItemTableFromType(row.item_type)}.${row.item_type.includes('::') && !row.item_type.includes('SD') ? 'type' : 'name'} FROM ${getItemTableFromType(row.item_type)} WHERE id = mission_rewards.item_id) 
+                    END
+                )
+        `;
+    });
+
+    let sql = `
+    SELECT DISTINCT
+    mission_rewards.item_type AS reward_item_type,
+    CASE
+        ${caseClause}
+    END AS reward_item_name
+    FROM mission_rewards
+    JOIN missions ON mission_rewards.mission_id = missions.id
+    JOIN mission_categories ON missions.mission_category_id = mission_categories.id
+    WHERE mission_categories.type = 'MissionCategory::ExtraMissionCategory'
+    AND missions.start_at <= CURRENT_DATE
+    AND missions.end_at >= CURRENT_DATE
+`
+    const result = (await executeSelect(`${sql}`)).map(reward => ({
+        ...reward,
+        reward_item_name: typeCorrespondances[reward.reward_item_type] || typeCorrespondances[reward.reward_item_name] || reward.reward_item_name
+    }));
+    res.status(200).json(result, null, 2);
+});
+
+
+/**
+ * route pour avoir tous les rewards des missions limités (peu importe le statut de disponibilité des missions)
+ */
+router.get(`/mission-reward-items/limited-missions-rewards`, async (req, res) => {
+    let data = req.body;
+
+    let caseClause = '';
+    (await executeSelect(`SELECT DISTINCT item_type FROM mission_rewards JOIN missions ON mission_rewards.mission_id = missions.id
+    JOIN mission_categories ON missions.mission_category_id = mission_categories.id
+    WHERE mission_categories.type = 'MissionCategory::ExtraMissionCategory'`)).forEach(row => {
+        console.log(row.item_type, getItemTableFromType(row.item_type));
+        caseClause += `
+            WHEN mission_rewards.item_type = '${row.item_type}' THEN 
+                (SELECT 
+                    CASE 
+                        WHEN '${getItemTableFromType(row.item_type)}' IN (SELECT sqlite_master.name
+                            FROM sqlite_master
+                            WHERE sqlite_master.name='${getItemTableFromType(row.item_type)}' AND type='table') THEN 
+                            (SELECT ${getItemTableFromType(row.item_type)}.${row.item_type.includes('::') && !row.item_type.includes('SD') ? 'type' : 'name'} FROM ${getItemTableFromType(row.item_type)} WHERE id = mission_rewards.item_id) 
+                    END
+                )
+        `;
+    });
+
+    let sql = `
+    SELECT
+    mission_rewards.id AS reward_id,
+    mission_rewards.item_type AS reward_item_type,
+    mission_rewards.item_id AS reward_item_id,
+    CASE
+        ${caseClause}
+    END AS reward_item_name
+    FROM mission_rewards
+    JOIN missions ON mission_rewards.mission_id = missions.id
+    JOIN mission_categories ON missions.mission_category_id = mission_categories.id
+    WHERE mission_categories.type = 'MissionCategory::ExtraMissionCategory'
+`
+    const result = (await executeSelect(`${sql}`)).map(reward => ({
+        ...reward,
+        reward_item_name: typeCorrespondances[reward.reward_item_type] || reward.reward_item_name
+    }));
+    console.log(result.filter((obj, index) => {
+        return result.findIndex(item => item.reward_item_name === obj.reward_item_name) === index;
+    }).length);
+    res.status(200).json(result, null, 2);
+});
+
+router.get(`/limited-missions`, async (req, res) => {
+    let data = req.body;
+
+    res.status(200).json((await executeSelect(`
+    SELECT
+    id,
+    type,
+    name,
+    end_at,
+    start_at,
+    CASE
+        WHEN end_at > datetime('now') THEN 1
+        ELSE 0
+    END AS current
+    FROM
+        missions
+    WHERE
+        mission_category_id IN (
+            SELECT
+                id
+            FROM
+                mission_categories
+            WHERE
+                type = 'MissionCategory::ExtraMissionCategory'
+        )
+    `)).map(item => ({
+        ...item,
+        current: item.current === 1,
+    })), null, 2)
+})
+
+
+router.get(`/limited-missions-categories`, async (req, res) => {
+    let data = req.body;
+
+    let sql = `
+    SELECT
+    mission_categories.id,
+    mission_categories.type,
+    mission_categories.name,
+    mission_categories.image_path,
+    MAX(missions.end_at) AS end_at,
+    missions.start_at,
+    CASE
+        WHEN MAX(missions.end_at) > datetime('now') THEN 1
+        ELSE 0
+    END AS current
+    FROM mission_categories
+    JOIN missions ON mission_categories.id = missions.mission_category_id
+    WHERE mission_categories.type = 'MissionCategory::ExtraMissionCategory'
+    GROUP BY mission_categories.id;
+`
+    const result = await executeSelect(`${sql}`);
+    res.status(200).json(result.map(item => ({
+        ...item,
+        current: item.current === 1,
+    })), null, 2);
+});
+
+/**
+ * route pour avoir tous les items des rewards des missions limitées actuellement dispo
+ */
+router.get(`/mission-reward-items/names/limited/available`, async (req, res) => {
+    let data = req.body;
+
+    let caseClause = '';
+    (await executeSelect(`SELECT DISTINCT item_type FROM mission_rewards JOIN missions ON mission_rewards.mission_id = missions.id
+    JOIN mission_categories ON missions.mission_category_id = mission_categories.id
+    WHERE mission_categories.type = 'MissionCategory::ExtraMissionCategory'`)).forEach(row => {
+        console.log(row.item_type, getItemTableFromType(row.item_type));
+        caseClause += `
+            WHEN mission_rewards.item_type = '${row.item_type}' THEN 
+                (SELECT 
+                    CASE 
+                        WHEN '${getItemTableFromType(row.item_type)}' IN (SELECT sqlite_master.name
+                            FROM sqlite_master
+                            WHERE sqlite_master.name='${getItemTableFromType(row.item_type)}' AND type='table') THEN 
+                            (SELECT ${getItemTableFromType(row.item_type)}.${row.item_type.includes('::') && !row.item_type.includes('SD') ? 'type' : 'name'} FROM ${getItemTableFromType(row.item_type)} WHERE id = mission_rewards.item_id) 
+                    END
+                )
+        `;
+    });
+
+    let sql = `
+    SELECT DISTINCT
+    mission_rewards.item_type AS reward_item_type,
+    CASE
+        ${caseClause}
+    END AS reward_item_name
+    FROM mission_rewards
+    JOIN missions ON mission_rewards.mission_id = missions.id
+    JOIN mission_categories ON missions.mission_category_id = mission_categories.id
+    WHERE mission_categories.type = 'MissionCategory::ExtraMissionCategory'
+    AND missions.start_at <= CURRENT_DATE
+    AND missions.end_at >= CURRENT_DATE
+`
+    const result = (await executeSelect(`${sql}`)).map(reward => ({
+        ...reward,
+        reward_item_name: typeCorrespondances[reward.reward_item_type] || typeCorrespondances[reward.reward_item_name] || reward.reward_item_name
+    }));
+    res.status(200).json(result, null, 2);
+});
+
+
+/**
+ * route pour avoir tous les types d'objets dfférents (mission.item_type) pour les missions limitées
+ */
+router.get(`/mission-rewards/reward-types/limited-missions`, async (req, res) => {
+    let data = req.body;
+
+
+    let sql = `
+    SELECT DISTINCT
+    mission_rewards.item_type AS raw_reward_type,
+    mission_rewards.item_type AS reward_type
+    FROM mission_rewards
+    JOIN missions ON mission_rewards.mission_id = missions.id
+    JOIN mission_categories ON missions.mission_category_id = mission_categories.id
+    WHERE mission_categories.type = 'MissionCategory::ExtraMissionCategory'
+`
+    const result = (await executeSelect(`${sql}`)).map(reward => ({
+        ...reward,
+        reward_type: typeCorrespondances[reward.raw_reward_type] || reward.raw_reward_type
+    }));
+    res.status(200).json(result, null, 2);
+});
+
+router.get(`/mission-rewards/reward-types/limited-missions/:item_type`, async (req, res) => {
+    let data = req.body;
+    let selected_type = req.params.item_type;
+
+    let sql = `
+    SELECT DISTINCT
+    mission_rewards.item_type AS raw_reward_type,
+    mission_rewards.item_type AS reward_type,
+    mission_rewards.quantity AS quantity,
+    missions.id AS mission_id,
+    mission_categories.id AS mission_category_id
+    FROM mission_rewards
+    JOIN missions ON mission_rewards.mission_id = missions.id
+    JOIN mission_categories ON missions.mission_category_id = mission_categories.id
+    WHERE mission_categories.type = 'MissionCategory::ExtraMissionCategory'
+    AND mission_rewards.item_type = '${selected_type}'
+`
+    const result = (await executeSelect(`${sql}`)).map(reward => ({
+        ...reward,
+        reward_type: typeCorrespondances[reward.raw_reward_type] || reward.raw_reward_type
+    }));
+    res.status(200).json(result, null, 2);
+});

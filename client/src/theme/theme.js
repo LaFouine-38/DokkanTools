@@ -26,11 +26,38 @@ export default createTheme({
             }
         },
         MainBox: {
-            styleOverrides:{
-                root:{
+            styleOverrides: {
+                root: {
                     backgroundColor: 'red'
                 }
             }
-        }
+        },
+        MuiSelect: {
+            styleOverrides: {
+                icon: {
+                    color: 'white'
+                },
+                select: {
+                    color: 'white',
+                },
+            }
+        },
+        MuiMenu: {
+            styleOverrides: {
+                paper: {
+                    backgroundColor: 'rgb(29, 38, 47)',
+                }
+            }
+        },
+        MuiMenuItem: {
+            styleOverrides: {
+                root: {
+                    color: "white",
+                    "&.Mui-selected": {
+                        "&.Mui-focusVisible": { backgroundColor: "rgba(0, 0, 0, 0.08)" }
+                    }
+                },
+            }
+        },
     }
 });

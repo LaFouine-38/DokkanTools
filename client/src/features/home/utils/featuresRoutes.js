@@ -1,10 +1,10 @@
 export const featuresRoutes = [
     {
-        textName: "Calculateur",
-        path: "/calc",
-    }/*,
+        displayedName: "Calculateur",
+        path: "/calculator",
+    },
     {
-        textName: "Chercheur de missions",
+        displayedName: "Chercheur de missions",
         path: "/missions-finder",
-    },*/
+    },
 ]

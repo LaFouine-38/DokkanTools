@@ -33,7 +33,7 @@ rm = bataille royale
         -   <details>
             <summary>Régulières</summary>
 
-            > [type](#mission_categories.type) = MissionCategory::NormalMissionCategory
+            > [mission_categories.type](#mission_categories.type) = MissionCategory::NormalMissionCategory
 
             -   Régulières Missions
             -   Missions Tout-Puissant

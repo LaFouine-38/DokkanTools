@@ -2,8 +2,8 @@ import React from 'react';
 import MainBox from '../../shared/components/MainBox.jsx'; // Importez votre composant principal
 import MainBoxContainer from '../../shared/components/MainBoxContainer.jsx';
 import MainTitle from '../../shared/components/MainTitle.jsx';
-import { Grid, Paper } from '@mui/material'
-import GridButtonLink from '../../shared/components/GridButtonLink.tsx';
+import { Grid } from '@mui/material'
+import GridCardLink from '../../shared/components/GridCardLink.tsx';
 import { featuresRoutes } from './utils/featuresRoutes.js';
 
 export default function Home() {
@@ -15,7 +15,9 @@ export default function Home() {
                     {
                         featuresRoutes.map((route, index) => {
                             return <Grid item xs={12} sm={6} md={4} key={index}>
-                                <GridButtonLink textName={route.textName} path={route.path} />
+                                <GridCardLink href={route.path}>
+                                    <span>{route.displayedName}</span>
+                                </GridCardLink>
                             </Grid>
                         })
                     }
