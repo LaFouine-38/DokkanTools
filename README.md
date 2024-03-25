@@ -1,4 +1,5 @@
 Roadmap:
+Pour plus de détails, regarder les autres branches du projet
 - [x] - ~~Optimiser le build de l'app~~
     - avec webpack le build est long, par contre il est opti niveau chunks etc (opti client)
 - [ ] - Commencer l'api
